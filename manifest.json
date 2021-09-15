@@ -2,5 +2,9 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "name": "Share Accounts",
-  "description": "For sharing your personal registered sites with other people for a limited amount of time."
+  "description": "For sharing your personal registered sites with other people for a limited amount of time.",
+  "action": {
+    "default_title": "Share Accounts Login",
+    "default_popup": "accounts.html"
+  }
 }
