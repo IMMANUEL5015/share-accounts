@@ -1,0 +1,74 @@
+body {
+    width: 350px;
+    height: 400px;
+    font-size: 16px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  #loading {
+    position: absolute;
+    top: 0px;
+    color: rgb(5, 199, 5);
+  }
+  
+  #error {
+    position: absolute;
+    top: 0px;
+    color: rgb(243, 38, 38);
+  }
+
+  #main {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: 310px;
+    position: relative;
+  }
+
+  #main::-webkit-scrollbar {
+    display: none;
+  }
+
+  .back{
+      width: 100px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 5px 20px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 2px 2px 2px 2px grey;
+      margin-bottom: 20px;
+  }
+
+  .back a{
+      text-decoration: none;
+      color: black;
+  }
+
+  .userBox{
+      border: 1px solid grey;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      box-shadow: 2px 2px 2px 2px grey;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .asterisk{
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+  }

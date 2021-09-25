@@ -105,3 +105,28 @@ button:focus {
   outline: none;
   border: none;
 }
+
+/* Admin View */
+.adminView{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+  margin-top: 50px;
+}
+
+.x{
+  border: 1px solid grey;
+  height: 100px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.x a{
+  text-decoration: none;
+  color: black;
+}

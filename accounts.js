@@ -1,7 +1,14 @@
 const baseUrl = "https://share-accounts-api.herokuapp.com/";
 
 const main = document.getElementById("main");
-const mainContent = `<div></div>`;
+const mainContent = `<div class="adminView">
+  <div class="x">Create User</div>
+  <div class="x" id="viewUsers">
+    <a href="users.html">View Users</a>
+  </div>
+  <div class="x">Create Account</div>
+  <div class="x">View Accounts</div>  
+</div>`;
 
 chrome.storage.sync.get(["loggedInUser"], function (result) {
   const loggedInUser = JSON.parse(result.loggedInUser);
@@ -9,7 +16,7 @@ chrome.storage.sync.get(["loggedInUser"], function (result) {
   token = loggedInUser.token;
   user = loggedInUser.data.user;
 
-  if (token && user) {
+  if (token && user && user.role === 'admin') {
     main.innerHTML = mainContent;
   }
 });
@@ -59,7 +66,9 @@ loginBtn.addEventListener("click", async (e) => {
         loading.textContent = "";
       }, 5000);
 
-      main.innerHTML = mainContent;
+      if(res && res.data && res.data.user && res.data.user.role === "admin"){
+        main.innerHTML = mainContent;
+      }
     }
   } catch (error) {
     errorDiv.textContent = error.response.data.message;
