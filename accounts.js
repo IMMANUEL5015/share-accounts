@@ -9,7 +9,7 @@ const mainContent = `<div class="adminView">
     <a href="users.html">View Users</a>
   </div>
   <div class="x" id="create_account">Create Account</div>
-  <div class="x">View Accounts</div>  
+  <div class="x"><a href="view_accounts.html">View Accounts</a></div>  
 </div>`;
 
 var port = chrome.runtime.connect({name: "knockknock"});

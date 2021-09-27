@@ -34,7 +34,6 @@ async function allStorage(data, dataTwo, token) {
         });
     
         res = await res.json();
-        console.log(res);
 
         alert("Operation Successful!");
     }catch(error){
