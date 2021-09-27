@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="create_user.css">
+    <title>Create User</title>
+</head>
+<body>
+    <header>
+        <h1>Add New User</h1>
+    </header>
+
+    <div class="back">
+        <a href="accounts.html">Back</a>
+    </div>
+
+    <main id="main">
+        <form action="" id="register">
+            <div id="loading"></div>
+            <div id="error"></div>
+
+            <div class="form_group">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" required />
+            </div>
+
+            <div class="form_group">
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password" required />
+            </div>
+
+            <button id="registerBtn">Submit</button>
+        </form>
+    </main>
+</body>
+    <script src="create_user.js"></script>
+</html>

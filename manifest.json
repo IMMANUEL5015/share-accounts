@@ -7,7 +7,11 @@
     "default_title": "Share Accounts",
     "default_popup": "accounts.html"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs", "scripting", "unlimitedStorage", "cookies"],
+  "host_permissions": [
+    "*://*/*",
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "background.js"
   }

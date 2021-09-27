@@ -2,13 +2,27 @@ const baseUrl = "https://share-accounts-api.herokuapp.com/";
 
 const main = document.getElementById("main");
 const mainContent = `<div class="adminView">
-  <div class="x">Create User</div>
+  <div class="x">
+    <a href="create_user.html">Create User</a>
+  </div>
   <div class="x" id="viewUsers">
     <a href="users.html">View Users</a>
   </div>
-  <div class="x">Create Account</div>
+  <div class="x" id="create_account">Create Account</div>
   <div class="x">View Accounts</div>  
 </div>`;
+
+var port = chrome.runtime.connect({name: "knockknock"});
+
+const loading = document.getElementById("loading");
+const errorDiv = document.getElementById("error");
+
+const createAccountLogic = (token) => {
+  const createAccount = document.getElementById("create_account");
+  createAccount.addEventListener("click", function(){
+    port.postMessage({joke: token});
+  });
+}
 
 chrome.storage.sync.get(["loggedInUser"], function (result) {
   const loggedInUser = JSON.parse(result.loggedInUser);
@@ -18,14 +32,13 @@ chrome.storage.sync.get(["loggedInUser"], function (result) {
 
   if (token && user && user.role === 'admin') {
     main.innerHTML = mainContent;
+
+    createAccountLogic(token);
   }
 });
 
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
-
-const loading = document.getElementById("loading");
-const errorDiv = document.getElementById("error");
 
 const loginBtn = document.getElementById("loginBtn");
 
@@ -68,6 +81,8 @@ loginBtn.addEventListener("click", async (e) => {
 
       if(res && res.data && res.data.user && res.data.user.role === "admin"){
         main.innerHTML = mainContent;
+
+        createAccountLogic();
       }
     }
   } catch (error) {
