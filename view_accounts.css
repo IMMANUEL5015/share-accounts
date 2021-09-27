@@ -54,6 +54,21 @@ body {
       color: black;
   }
 
+  .share-to-user{
+      margin-left: 170px;
+      position: absolute;
+      top: 80px;
+      height: 28px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      box-shadow: 2px 2px 2px 2px grey;
+      padding-left: 5px;
+  }
+
+  .share-to-user:focus{
+      outline: none;
+  }
+
   .userBox{
       border: 1px solid grey;
       margin-bottom: 20px;
@@ -64,6 +79,10 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
+  }
+
+  .account_name{
+      cursor: pointer;
   }
 
   .asterisk{
