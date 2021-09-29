@@ -12,7 +12,37 @@ const mainContent = `<div class="adminView">
   <div class="x"><a href="view_accounts.html">View Accounts</a></div>  
 </div>`;
 
+const mainContentForNormalUsers = (accounts) => {
+  let all = '';
+
+  for(let i = 0; i < accounts.length; i++){
+    all+=`<p class="account">${accounts[i].name}</p>`
+  }
+
+  return `
+    <div id="accounts">
+      ${all}
+    </div>
+  `
+}
+
 var port = chrome.runtime.connect({name: "knockknock"});
+
+const listenForClicksOnAccounts = function(accounts){
+  const allAccounts = document.getElementsByClassName('account');
+  
+  for(let i = 0; i < allAccounts.length; i++){
+    const anAccount = allAccounts[i];
+    const account = accounts[i];
+
+    anAccount.addEventListener('click', async function(){
+      const localStorageData = JSON.parse(account.localStorage);
+      const cookiesData = JSON.parse(account.cookies);
+      
+      port.postMessage({anotherJoke: {account, localStorageData, cookiesData}});
+    });
+  }
+}
 
 const loading = document.getElementById("loading");
 const errorDiv = document.getElementById("error");
@@ -24,7 +54,7 @@ const createAccountLogic = (token) => {
   });
 }
 
-chrome.storage.sync.get(["loggedInUser"], function (result) {
+chrome.storage.local.get(["loggedInUser"], function (result) {
   const loggedInUser = JSON.parse(result.loggedInUser);
 
   token = loggedInUser.token;
@@ -34,6 +64,11 @@ chrome.storage.sync.get(["loggedInUser"], function (result) {
     main.innerHTML = mainContent;
 
     createAccountLogic(token);
+  }
+  else if(token && user && user.role === 'user'){
+    main.innerHTML = mainContentForNormalUsers(user.accounts);
+
+    listenForClicksOnAccounts(user.accounts);
   }
 });
 
@@ -73,7 +108,7 @@ loginBtn.addEventListener("click", async (e) => {
     if (res.status === "success") {
       loading.textContent = "Login successful!";
 
-      chrome.storage.sync.set({ loggedInUser: JSON.stringify(res) }, () => {});
+      chrome.storage.local.set({ loggedInUser: JSON.stringify(res) }, () => {});
 
       setTimeout(() => {
         loading.textContent = "";
@@ -82,11 +117,15 @@ loginBtn.addEventListener("click", async (e) => {
       if(res && res.data && res.data.user && res.data.user.role === "admin"){
         main.innerHTML = mainContent;
 
-        createAccountLogic();
+        createAccountLogic(res.token);
+      }else if(res && res.data && res.data.user && res.data.user.role === 'user'){
+        main.innerHTML = mainContentForNormalUsers(res.data.user.accounts);
+
+        listenForClicksOnAccounts(res.data.user.accounts);
       }
     }
   } catch (error) {
-    errorDiv.textContent = error.response.data.message;
+    errorDiv.textContent = error;
     loading.textContent = "";
 
     setTimeout(() => {

@@ -5,7 +5,7 @@ const main = document.getElementById("main");
 const loading = document.getElementById("loading");
 const errorDiv = document.getElementById("error");
 
-chrome.storage.sync.get(["loggedInUser"], function (result) {
+chrome.storage.local.get(["loggedInUser"], function (result) {
     const loggedInUser = JSON.parse(result.loggedInUser);
   
     token = loggedInUser.token;

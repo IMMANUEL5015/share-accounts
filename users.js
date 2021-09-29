@@ -5,12 +5,12 @@ const main = document.getElementById("main");
 const loading = document.getElementById("loading");
 const errorDiv = document.getElementById("error");
 
-chrome.storage.sync.get(["loggedInUser"], function (result) {
+chrome.storage.local.get(["loggedInUser"], function (result) {
     const loggedInUser = JSON.parse(result.loggedInUser);
   
     token = loggedInUser.token;
     user = loggedInUser.data.user;
-  
+
     if (token && user && user.role === 'admin') {
         loading.innerText = "Loading. Please wait...";
         fetch(baseUrl + "users", {

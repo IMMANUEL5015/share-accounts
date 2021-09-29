@@ -1,6 +1,6 @@
 const baseUrl = "https://share-accounts-api.herokuapp.com/";
 
-chrome.storage.sync.get(["loggedInUser"], function (result) {
+chrome.storage.local.get(["loggedInUser"], function (result) {
   const loggedInUser = JSON.parse(result.loggedInUser);
 
   token = loggedInUser.token;

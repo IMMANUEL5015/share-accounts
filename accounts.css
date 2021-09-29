@@ -78,8 +78,9 @@ main {
   border: 1px solid gainsboro;
   padding: 10px;
   box-sizing: border-box;
-  height: 45px;
+  height: auto;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #accounts p:hover {

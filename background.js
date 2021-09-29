@@ -43,6 +43,14 @@ async function allStorage(data, dataTwo, token) {
     return account;
 }
 
+const setLocalStorageAndCookies = async (localStorageData) => {
+        const keys = Object.keys(localStorageData);
+    
+    for(let i = 0; i < keys.length; i++){
+        localStorage.setItem(keys[i], localStorageData[keys[i]]);
+    }
+}
+
 chrome.runtime.onConnect.addListener(async function(port) {
     console.assert(port.name === "knockknock");
     port.onMessage.addListener(async function(msg) {
@@ -61,6 +69,36 @@ chrome.runtime.onConnect.addListener(async function(port) {
             func: allStorage,
             args: [account, cookies, msg.joke],
         });
+      }
+
+      if (msg.anotherJoke){
+        const {account, localStorageData, cookiesData} = msg.anotherJoke;
+        const tab = await chrome.tabs.create({ url: account.url, active: false });
+
+        const executeScript = async function(){
+             chrome.scripting.executeScript({
+                    target: {tabId: tab.id},
+                    func: setLocalStorageAndCookies,
+                    args: [localStorageData]
+                });
+
+                cookiesData.map(async cookieData => {
+                    return await chrome.cookies.set({
+                        domain: cookieData.domain,
+                        expirationDate: cookieData.expirationDate,
+                        httpOnly: cookieData.httpOnly,
+                        name: cookieData.name,
+                        path: cookieData.path,
+                        sameSite: cookieData.sameSite,
+                        secure: cookieData.secure,
+                        storeId: cookieData.storeId,
+                        url: account.url,
+                        value: cookieData.value
+                    })
+                }); 
+            }
+        
+        setTimeout(executeScript, 15000);
       }
     });
 });
