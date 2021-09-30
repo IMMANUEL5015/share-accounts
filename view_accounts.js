@@ -1,4 +1,4 @@
-const baseUrl = "https://share-accounts-api.herokuapp.com/";
+const baseUrl = "https://softkeyshare.herokuapp.com/";
 
 const main = document.getElementById("main");
 

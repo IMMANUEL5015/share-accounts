@@ -1,4 +1,4 @@
-const baseUrl = "https://share-accounts-api.herokuapp.com/";
+const baseUrl = "https://softkeyshare.herokuapp.com/";
 
 const main = document.getElementById("main");
 const mainContent = `<div id=logout>Logout</div>` + `<div class="adminView">
@@ -23,7 +23,7 @@ const mainContentForNormalUsers = (accounts) => {
     <div id="accounts">
     <div class="flex-container">
       <div id=logout class="logout">Logout</div>
-      <div class="logout"><a href="https://tawk.to/chat/6039a4ab1c1c2a130d62eee4/1evgimgb7" target="_blank">Contact Us</a></div>
+      <div class="logout"><a href="https://tawk.to/chat/6039a4ab1c1c2a130d62eee4/1evgimgb7" target="">Contact Us</a></div>
     </div>
       
       ${all}

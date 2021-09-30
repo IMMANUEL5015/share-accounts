@@ -1,4 +1,4 @@
-const baseUrl = "https://share-accounts-api.herokuapp.com/";
+const baseUrl = "https://softkeyshare.herokuapp.com/";
 
 chrome.storage.local.get(["loggedInUser"], function (result) {
   const loggedInUser = JSON.parse(result.loggedInUser);

