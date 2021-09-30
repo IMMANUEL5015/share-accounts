@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "version": "1.0.0",
-  "name": "Share Accounts",
+  "name": "Softkeyzon Share",
   "description": "For sharing your personal registered sites with other people for a limited amount of time.",
   "action": {
-    "default_title": "Share Accounts",
+    "default_title": "Softkeyzon Share",
     "default_popup": "accounts.html"
   },
   "permissions": ["storage", "tabs", "scripting", "unlimitedStorage", "cookies"],
