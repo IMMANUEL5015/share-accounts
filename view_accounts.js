@@ -88,7 +88,7 @@ chrome.storage.local.get(["loggedInUser"], function (result) {
                                 return alert("Please enter username");
                             }
                             
-                            const option = prompt("What do you want to do...share or selete?");
+                            const option = prompt("What do you want to do...share or delete?");
 
                             if(!option || (option !== 'delete' && option !== 'share')){
                               return alert("Please specify the action you wish to perform. share or delete.");
