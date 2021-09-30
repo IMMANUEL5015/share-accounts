@@ -1,7 +1,7 @@
 const baseUrl = "https://softkeyshare.herokuapp.com/";
 
 const main = document.getElementById("main");
-const mainContent = `<div id=logout>Logout</div>` + `<div class="adminView">
+const mainContent = `<div id=logout class="logout">Logout</div>` + `<div class="adminView">
   <div class="x">
     <a href="create_user.html">Create User</a>
   </div>
