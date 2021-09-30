@@ -62,7 +62,7 @@ main {
 }
 
 #accounts {
-  height: 230px;
+  height: 260px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -107,7 +107,12 @@ button:focus {
   border: none;
 }
 
-#logout{
+.flex-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.logout{
   border: 1px solid grey;
   height: 30px;
   border-radius: 5px;
@@ -118,6 +123,11 @@ button:focus {
   justify-content: center;
   cursor: pointer;
   width: 100px;
+}
+
+.logout a{
+  text-decoration: none;
+  color: black;
 }
 
 .fullscreen{
