@@ -1,7 +1,7 @@
 const baseUrl = "https://share-accounts-api.herokuapp.com/";
 
 const main = document.getElementById("main");
-const mainContent = `<div class="adminView">
+const mainContent = `<div id=logout>Logout</div>` + `<div class="adminView">
   <div class="x">
     <a href="create_user.html">Create User</a>
   </div>
@@ -21,6 +21,8 @@ const mainContentForNormalUsers = (accounts) => {
 
   return `
     <div id="accounts">
+      <div id=logout>Logout</div>
+      
       ${all}
     </div>
   `
@@ -42,6 +44,15 @@ const listenForClicksOnAccounts = function(accounts){
       port.postMessage({anotherJoke: {account, localStorageData, cookiesData}});
     });
   }
+
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", function(){
+    chrome.storage.local.clear();
+    main.innerHTML = `<div class="fullscreen">
+      <p>You are now logged out.</p>
+      <p>Refresh the extension and login again.</p>
+    </div>`
+  });
 }
 
 const loading = document.getElementById("loading");
@@ -52,9 +63,20 @@ const createAccountLogic = (token) => {
   createAccount.addEventListener("click", function(){
     port.postMessage({joke: token});
   });
+
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", function(){
+    chrome.storage.local.clear();
+    main.innerHTML = `<div class="fullscreen">
+      <p>You are now logged out.</p>
+      <p>Refresh the extension and login again.</p>
+    </div>`
+  }); 
 }
 
 chrome.storage.local.get(["loggedInUser"], function (result) {
+  if(!result.loggedInUser) return;
+  
   const loggedInUser = JSON.parse(result.loggedInUser);
 
   token = loggedInUser.token;

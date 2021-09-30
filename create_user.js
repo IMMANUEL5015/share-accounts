@@ -10,6 +10,7 @@ chrome.storage.local.get(["loggedInUser"], function (result) {
 
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
+    const adminInput = document.getElementById("admin");
     
     const loading = document.getElementById("loading");
     const errorDiv = document.getElementById("error");
@@ -20,17 +21,34 @@ chrome.storage.local.get(["loggedInUser"], function (result) {
     
       const username = usernameInput.value;
       const password = passwordInput.value;
+      const adminCode = adminInput.value;
     
       try {
         if (username && password) loading.textContent = "Please wait...";
-        let res = await fetch(baseUrl + "users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify({ username, password }),
-        });
+        
+        let res;
+        
+        if(username && password && !adminCode){
+          res = await fetch(baseUrl + "users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ username, password }),
+          });
+        }
+        
+        if(username && password && adminCode){
+          res = await fetch(baseUrl + "users/admin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ username, password, adminCode }),
+          });
+        } 
     
         res = await res.json();
     
@@ -54,9 +72,11 @@ chrome.storage.local.get(["loggedInUser"], function (result) {
         
         usernameInput.value = "";
         passwordInput.value = "";
+        adminInput.value = "";
     } catch (error) {
         usernameInput.value = "";
         passwordInput.value = "";
+        adminInput.value = "";
 
         errorDiv.textContent = error.response.data.message;
         loading.textContent = "";

@@ -88,20 +88,26 @@ chrome.storage.local.get(["loggedInUser"], function (result) {
                                 return alert("Please enter username");
                             }
                             
+                            const option = prompt("What do you want to do...share or selete?");
+
+                            if(!option || (option !== 'delete' && option !== 'share')){
+                              return alert("Please specify the action you wish to perform. share or delete.");
+                            }
+
                             let res = await fetch(baseUrl + `users/${share.value}`, {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
                                   "Authorization": `Bearer ${token}`,
                                 },
-                                body: JSON.stringify({accountId: account._id})
+                                body: JSON.stringify({accountId: account._id, option})
                             });
 
                             loading.textContent = "";
                             share.value = "";
 
                             if(res.status == 200){
-                                return alert("Account Shared With User Successfully!");
+                                return alert(`Operation Successful!`);
                             }else{
                                 return alert("An error occured or user does not exist!!");
                             }
